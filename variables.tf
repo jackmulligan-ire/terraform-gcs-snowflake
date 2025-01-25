@@ -8,6 +8,11 @@ variable "project" {
   default     = "terraform-demo-448321"
 }
 
+variable "sf_project" {
+  description = "Snowflake Project ID"
+  default     = "terraform_demo_448321"
+}
+
 variable "region" {
   description = "Google Cloud project region"
   default     = "eur-central1"
