@@ -82,6 +82,17 @@ resource "snowflake_schema" "terraform_demo_schema" {
   database = snowflake_database.terraform_demo_db.name
 }
 
+resource "snowflake_user" "terraform_demo_user" {
+  name = "${var.sf_project}_user"
+  rsa_public_key   = var.sf_project_private_key
+  must_change_password = "false"
+}
+
+resource "snowflake_grant_account_role" "g" {
+  role_name = "ACCOUNTADMIN"
+  user_name = snowflake_user.terraform_demo_user.name
+}
+
 resource "snowflake_file_format" "terraform_file_format" {
   name = "${var.sf_project}_file_format"
   database = snowflake_database.terraform_demo_db.name
